@@ -14,9 +14,11 @@ namespace API.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly DataContext _context;
+
         public ValuesController(DataContext context)
         {
             _context = context;
+
         }
 
         // GET api/values
@@ -31,7 +33,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Value>> Get(int id)
         {
-            var value = await _context.Values.FindAsync(id);
+            var value = await _context.Values.FirstOrDefaultAsync(x=>x.Id ==id);
             return Ok(value);
         }
 
